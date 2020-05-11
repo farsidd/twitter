@@ -12,20 +12,23 @@
         
         left: 50%;
         "
-        class="rounded-full lg:w-1/5 md:w-1/5 sm:w-2/12 bottom-0 mr-2 absolute transform -translate-x-1/2 translate-y-1/2 " src="https://i.pravatar.cc/147?u={{$user->email}}" alt="Following">
+        class="rounded-full lg:w-1/5 md:w-1/5 sm:w-2/12 bottom-0 mr-2 absolute transform -translate-x-1/2 translate-y-1/2 " src="{{$user->avatar}}" alt="Following">
     
     </div>
   
     <div class="flex justify-between items-center">
-        <div>
+        <div style="max-width: 270px">
         <h3 class="text-2xl font-bold mb-0">{{$user->name}}</h3>
         <p class="text-sm">Joined {{ $user->created_at->diffForHumans() }}</p>
         </div>
         <div class="flex">
-            <a class=" text-black border border-gray-300 mr-2 py-2 px-2 rounded-full text-sm" href="">Edit Profile</a>
-        <form action="/profiles/{{$user->name}}/follow" method="POST">
+            @can('edit', $user)
+            <a class=" text-black border border-gray-300 mr-2 py-2 px-2 rounded-full text-sm"
+        href="{{$user->username}}/edit">Edit Profile</a>
+            @endcan
+        <form action="/profiles/{{$user->username}}/follow" method="POST">
             @csrf
-         @if(auth()->user()->name != $user->name)
+         @if(auth()->user()->username != $user->username)
             
          <button 
             type="submit"
@@ -51,7 +54,7 @@
 </header>
 
 @include('timeline', [
-    'tweets' => $user->tweets
+    'tweets' => $tweets
 ])
 
 </x-app>

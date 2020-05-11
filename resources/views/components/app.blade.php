@@ -14,7 +14,7 @@
                 </div>
             
                 
-                <div class="lg:w-1/6 bg-blue-100 rounded-lg p-4">
+                <div class="lg:w-1/6 bg-blue-100 rounded-lg p-4 h-full lg:mt-0 md:mt-0 sm:mt-4">
                     @include('friends-list')
                 </div>
             </div>
